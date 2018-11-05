@@ -1,0 +1,621 @@
+<!doctype html>
+<html>
+    
+<!-- Mirrored from examples.phaser.io/embed.php?f=geometry/centroid.js by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 02 Nov 2018 06:40:59 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+        <meta charset="UTF-8" />
+        <title>Phaser Example Runner</title>
+        <meta name="viewport" content="initial-scale=1 maximum-scale=1 user-scalable=0 minimal-ui" />
+        <script src="jquery-2.0.3.min.js" type="text/javascript"></script>
+        <script src="phaser.2.6.2.min.js" type="text/javascript"></script>
+    
+        <style>
+        #ideditor{
+
+            width: 100%;
+            height: 100%;
+        }
+            body {
+
+
+                margin: 0px;
+                padding: 0px;
+                font-family: Arial;
+                font-size: 14px;
+                background-color: #000000;
+                color: #fff;
+            }
+            #idp{
+                position: absolute;
+                top: 0;
+                font-size: 29px;
+z-index: 3;
+              width: 1000px;
+             height: 70px;
+             background:red;  
+            }
+
+ #phaser-example{
+z-index: 2;
+
+  width: 100%;
+                height: 100%;          }
+
+#idfile{
+    height: 200px;
+    width: 500px;
+    display: flex
+    margin:auto;
+
+
+    background: red;
+
+
+
+}
+
+#files{
+
+     background: #3D94F6;
+   background-image: -webkit-linear-gradient(top, #3D94F6, #1E62D0);
+   background-image: -moz-linear-gradient(top, #3D94F6, #1E62D0);
+   background-image: -ms-linear-gradient(top, #3D94F6, #1E62D0);
+   background-image: -o-linear-gradient(top, #3D94F6, #1E62D0);
+   background-image: linear-gradient(to bottom, #3D94F6, #1E62D0);
+   -webkit-border-radius: 20px;
+   -moz-border-radius: 20px;
+   border-radius: 20px;
+   color: #FFFFFF;
+   font-family: Open Sans;
+   font-size:800px;
+   font-weight:200;
+   padding: 40px;
+   box-shadow: 1px 1px 20px 0px #000000;
+   -webkit-box-shadow: 1px 1px 20px 0px #000000;
+   -moz-box-shadow: 1px 1px 20px 0px #000000;
+   text-shadow: 1px 1px 20px #000000;
+   border: solid #337FED 1px;
+   text-decoration: none;
+   display: inline-block;
+   cursor: pointer;  
+}
+        </style>
+    </head>
+    <body onkeypress="myFunction(event)">
+
+
+    <div id="idfile">   
+<input type="file" id="files" name="files[]" multiple />
+<output id="list"></output>
+</div>  
+
+
+
+
+
+
+<div id="ideditor">
+     xxxx  <input type="text" id="idux" value="0">
+     yy  <input type="text" id="iduy" value="0"> 
+
+
+
+        <div id="phaser-example"></div>
+<p id="idp">ggggggg</p>
+
+
+</div>
+        <script type="text/javascript">
+
+        var IDE_HOOK = false;
+        var VERSION = '2.6.2';
+    var vw = window.innerWidth;
+var vh = window.innerHeight; 
+
+document.getElementById("idfile").style.position = "absolute";
+
+document.getElementById("idfile").style.left = String(vw/2)+"px";
+document.getElementById("idfile").style.top = String(vh/2)+"px";
+document.getElementById("ideditor").style.display = "none";
+/*
+
+ $(function()
+    {
+        $('#files').on('change',function ()
+        {
+            var filePath = $(this).val();
+       
+
+  var sc=  URL.createObjectURL(event.target.files[0])
+
+
+      miimagen=sc;//String(filePath);
+
+
+     console.log(miimagen);
+
+document.getElementById("ideditor").style.display = "block"; 
+
+document.getElementById("ideditor").style.width=String(vw)+"px";
+
+document.getElementById("phaser-example").style.width=String(vw)+"px";
+ inicia();
+
+
+
+
+
+
+
+
+
+
+        });
+    });
+*/
+
+var miimagen="";
+
+
+document.getElementById('files').addEventListener('change',
+    function (event) {
+    
+  var sc=  URL.createObjectURL(event.target.files[0])
+    miimagen=sc;
+
+
+    
+        alert(sc);
+document.getElementById("ideditor").style.display = "block"; 
+
+document.getElementById("ideditor").style.width=String(vw)+"px";
+
+document.getElementById("phaser-example").style.width=String(vw)+"px";
+ inicia();
+
+
+
+
+
+
+        
+    }
+);
+
+
+
+
+
+
+
+
+
+
+
+  function handleFileSelect(evt) {
+
+
+
+    //document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
+  }
+
+  document.getElementById('files').addEventListener('change', handleFileSelect, false);
+
+
+
+
+
+
+
+            var  ultimopnx=0;
+            var ultimopny=0;
+function myFunction(e) {
+
+
+
+
+tecla = (document.all) ? e.keyCode : e.which;
+  if (tecla==13) {
+
+  ultimopnx=document.getElementById("idux").value;
+ ultimopny =document.getElementById("iduy").value;
+
+
+if(ultimopnx==""){
+
+    ultimopnx=0;
+    ultimopny=0;
+
+       if(ultimopnx==""){
+ultimopnx=0;
+    ultimopny=0;
+    }
+}
+    if(ultimopnx==""){
+ultimopnx=0;
+    ultimopny=0;
+    if(ultimopnx==""){
+
+    ultimopnx=0;
+    ultimopny=0;
+
+  
+}
+    }
+
+else{
+ ultimopnx=parseFloat(document.getElementById("idux").value);
+ ultimopny =parseFloat(document.getElementById("iduy").value);
+}
+
+ alert(ultimopnx+"  "+ultimopny);
+
+te(mipuntosx.length);
+
+
+//[-100,0,100,0];
+
+for(var x in mipuntosx){
+escribe+=String((parseFloat(mipuntosx[x])+ultimopnx))+","+String((parseFloat(mipuntosy[x])+ultimopny)+",");
+
+;
+
+}
+escribe+="];"
+te(escribe);
+}
+}
+
+var escribe="";
+escribe="[";
+
+
+ 
+        // Example: Phaser.Point.centroid
+// Author: Lewis 'SEPTiMUS' Lane
+// URL: http://www.rotates.org - https://github.com/lewster32
+// Instructions: Click to add points. Points can be dragged. Centroid is displayed as a white cross, points as red rings.
+
+
+var tamanomundox=5000;
+var tamanomundoy=5000;
+  var game ;
+
+/*setTimeout(function(){document.getElementById("ideditor").style.display = "block"; 
+
+document.getElementById("ideditor").style.width=String(vw)+"px";
+
+document.getElementById("phaser-example").style.width=String(vw)+"px";
+ inicia(); }, 3000);*/
+
+function inicia(){
+  game = new Phaser.Game(tamanomundox, tamanomundoy, Phaser.CANVAS, 'phaser-example', { preload: preload, create: create, update: update, render: render });
+}
+
+
+
+function preload() {
+    game.load.spritesheet('centroid', 'assets/sprites/centroid.png', 16, 16);
+        game.load.image('cruz', 'c.png');
+
+ game.load.image('background','assets/tests/debug-grid-1920x1920.png');
+    game.load.image('player','assets/sprites/phaser-dude.png');
+
+game.load.image('grass',miimagen);
+
+
+
+}
+
+
+
+
+var player;
+var cursors;
+
+
+
+
+
+
+
+
+
+
+var points = [];
+var over = false;
+var currentPoint;
+var centroid;
+var inputType;
+var mipuntosx=[];
+var mipuntosy=[];
+function te(st){
+document.getElementById("idp").innerHTML =st;
+}
+var data = [];
+var polyline = [];
+var tracing = false;
+var current;
+var dropZone;
+var bmd;
+
+
+
+
+
+
+function create() {
+
+
+
+   // game.add.tileSprite(0, 0, tamanomundox, tamanomundoy, 'background');
+
+    game.world.setBounds(0, 0, tamanomundox, tamanomundox);
+
+    game.physics.startSystem(Phaser.Physics.P2JS);
+
+
+vbtci= game.add.sprite(game.world.centerX, game.world.centerY, 'cruz');
+vbtci.anchor.set(0.5);
+
+vbtci.scale.set(1);
+
+
+
+
+vgrass= game.add.sprite(game.world.centerX, game.world.centerY, 'grass');
+vgrass.anchor.set(0.5);
+
+vgrass.scale.set(1);
+
+    player = game.add.sprite(game.world.centerX, game.world.centerY, 'player');
+
+    game.physics.p2.enable(player);
+
+    player.body.fixedRotation = true;
+
+    cursors = game.input.keyboard.createCursorKeys();
+
+    //  Notice that the sprite doesn't have any momentum at all,
+    //  it's all just set by the camera follow type.
+    //  0.1 is the amount of linear interpolation to use.
+    //  The smaller the value, the smooth the camera (and the longer it takes to catch up)
+    game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON, 0.1, 0.1);
+
+    //  Listen for this signal to reset once the fade is over
+    game.camera.onFadeComplete.add(resetFade, this);
+
+    game.input.onDown.add(fade, this);
+
+
+
+
+console.log(vgrass.x+"  "+vgrass.y);
+
+
+
+
+
+    game.stage.backgroundColor = "#001B8A";
+
+    //  When the current line is done it'll get rendered to this bmd
+    bmd = game.make.bitmapData(tamanomundox, tamanomundoy);
+    bmd.addToWorld();
+
+    keys = game.input.keyboard.addKeys(
+        {
+            'close': Phaser.Keyboard.SPACEBAR,
+            'save': Phaser.Keyboard.S
+        }
+    );
+
+    keys.close.onDown.add(closeLine, this);
+    keys.save.onDown.add(save, this);
+
+    game.input.onDown.add(onDown, this);
+    game.input.onUp.add(onUp, this);
+    game.input.addMoveCallback(trace, this);
+
+
+}
+
+function fade() {
+
+    //  You can set your own fade color and duration
+    game.camera.fade(0x000000, 4000);
+
+}
+
+function resetFade() {
+
+    game.camera.resetFX();
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+function save() {
+
+    console.clear();
+
+    var s = 'var data = [\n';
+
+    for (var i = 0; i < polyline.length; i++)
+    {
+        s += '\t[ ' + polyline[i].start.x + ', ' + polyline[i].start.y + ', ' + polyline[i].end.x + ', ' + polyline[i].end.y + ' ]';
+
+        if (i === polyline.length - 1)
+        {
+            s += '\n';
+        }
+        else
+        {
+            s += ',\n';
+        }
+    }
+
+    s += '];';
+    
+    console.log(s);
+
+}
+
+function closeLine() {
+
+    if (current)
+    {
+        current = null;
+        tracing = false;
+    }
+
+}
+
+function onDown(pointer) {
+  mipuntosx.push(game.input.mousePointer.x-game.world.centerX);
+        mipuntosy.push(game.input.mousePointer.y-game.world.centerX);
+    if (tracing)
+    {
+        //  End line
+        var x =current.end.x;
+        var y = current.end.y;
+
+        polyline.push(current.clone());
+
+        bmd.line(current.start.x, current.start.y, current.end.x, current.end.y, '#00ff00');
+
+        //  If it closes the line then quit
+        if (x === dropZone.x && y === dropZone.y)
+        {
+            data.push(polyline.slice(0));
+            polyline = [];
+            current = null;
+            tracing = false;
+            redraw();
+        }
+        else
+        {
+            current = new Phaser.Line(x, y, pointer.x, pointer.y);
+        }
+    }
+    else
+    {
+        current = new Phaser.Line(pointer.x, pointer.y, pointer.x, pointer.y);
+        dropZone = new Phaser.Circle(pointer.x, pointer.y, 16);
+        tracing = true;
+    }
+
+}
+
+function redraw() {
+
+    // console.log(data);
+
+    bmd.cls();
+    bmd.ctx.fillStyle = '#00aa00';
+
+    for (var i = 0; i < data.length; i++)
+    {
+        var path = data[i];
+
+        bmd.ctx.beginPath();
+
+        bmd.ctx.moveTo(path[0].start.x, path[0].start.y);
+
+        for (var n = 0; n < path.length; n++)
+        {
+            bmd.ctx.lineTo(path[n].end.x, path[n].end.y);
+        }
+
+        bmd.ctx.closePath();
+
+        bmd.ctx.fill();
+    }
+
+}
+
+function onUp(pointer) {
+
+
+    
+}
+
+function trace(pointer) {
+
+    if (current)
+    {
+        if (dropZone.contains(pointer.x, pointer.y) && polyline.length > 1)
+        {
+            current.end.setTo(dropZone.x, dropZone.y);
+        }
+        else
+        {
+            current.end.setTo(pointer.x, pointer.y);
+        }
+    }
+
+}
+
+function update() {
+
+
+    player.body.setZeroVelocity();
+
+    if (cursors.up.isDown)
+    {
+        player.body.moveUp(300)
+    }
+    else if (cursors.down.isDown)
+    {
+        player.body.moveDown(300);
+    }
+
+    if (cursors.left.isDown)
+    {
+        player.body.velocity.x = -300;
+    }
+    else if (cursors.right.isDown)
+    {
+        player.body.moveRight(300);
+    }
+
+
+
+
+
+
+
+
+}
+
+function render() {
+
+    if (current)
+    {
+        if (dropZone.contains(current.end.x, current.end.y))
+        {
+            game.debug.geom(current, '#ffff00');
+        }
+        else
+        {
+            game.debug.geom(current, '#00ff00');
+        }
+    }
+
+}
+
+        
+        </script>
+
+    </body>
+</html>
